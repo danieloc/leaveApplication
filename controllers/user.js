@@ -343,7 +343,7 @@ exports.authFacebook = function(req, res) {
               facebook: profile.id,
               firstName: "FirstName",
               isNewUser : true,
-              jobTitle: "eng",
+              jobTitle: "Engineer",
               joinDate: new Date(),
               lastName: "LastName",
               picture: 'https://graph.facebook.com/' + profile.id + '/picture?type=large',

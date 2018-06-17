@@ -16,6 +16,49 @@ var todoSchema = new mongoose.Schema({
   completed: Boolean
 });
 
+
+var locationSchema = new mongoose.Schema({
+  name: String,
+  users: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+  dateCreated: Date
+});
+
+var auditTrailSchema = new mongoose.Schema({
+  name: String,
+  data: String,
+  type : String,
+  date: Date,
+  ipAddress: String,
+  createdBy: String
+});
+
+var requestsAndLeaveSchema = new mongoose.Schema({
+  dataStart: String,
+  dateEnd : String,
+  days : [{type: mongoose.Schema.Types.ObjectId, ref: 'dayOff'}],
+});
+
+var dayOffSchema = new mongoose.Schema({
+  date: Date,
+  type: String,
+  cost: Number,
+  halfDayAM : Boolean,
+  halfDayPM : Boolean
+});
+
+
+var workCycleSchema = new mongoose.Schema({
+  name: String,
+  commencementDate: String,
+  day: [{type: mongoose.Schema.Types.ObjectId, ref: 'workDaySchema'}],
+});
+
+var workDaySchema = new mongoose.Schema({
+  dayOfWeek: String,
+  from: Number,
+  to: Number
+});
+
 var nodeSchema = new mongoose.Schema({
   name: String,
   owner: {
@@ -34,6 +77,7 @@ var nodeSchema = new mongoose.Schema({
 });
 
 var userSchema = new mongoose.Schema({
+  allowanceLeft: Number,
   dateOfBirth: Date,
   email: { type: String, unique: true},
   facebook: String,
@@ -51,11 +95,13 @@ var userSchema = new mongoose.Schema({
   passwordResetToken: String,
   picture: String,
   primaryColor : String,
+  requestsAndLeave: [{type: mongoose.Schema.Types.ObjectId, ref: 'requestsAndLeave'}],
   site: String,
   supervisor: String,
   twitter: String,
   type: String,
-  vk: String
+  vk: String,
+  yearlyAllowance: Number
 
 }, schemaOptions);
 
@@ -104,9 +150,14 @@ userSchema.virtual('gravatar').get(function() {
   return 'https://gravatar.com/avatar/' + md5 + '?s=200&d=retro';
 });
 
-var ToDo = mongoose.model('ToDo', todoSchema);
 var Node = mongoose.model('Node', nodeSchema);
+var ToDo = mongoose.model('ToDo', todoSchema);
+var User = mongoose.model('AuditTrail', auditTrailSchema);
+var User = mongoose.model('DayOff', dayOffSchema);
+var User = mongoose.model('RequestsAndLeave', requestsAndLeaveSchema);
 var User = mongoose.model('User', userSchema);
+var User = mongoose.model('WorkCycle', workCycleSchema);
+var User = mongoose.model('WorkDay', workDaySchema);
 
 module.exports = {
   User : User, Node : Node, ToDo : ToDo

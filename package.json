@@ -1,6 +1,6 @@
 {
-  "name": "MegaBoilerPlateFYP",
-  "version": "1.0.0",
+  "name": "leaveApplication",
+  "version": "0.0.1",
   "description": "My app description",
   "scripts": {
     "build": "webpack --display-error-details",

@@ -7,7 +7,7 @@ import Signup from './components/Account/Signup';
 import Profile from './components/Account/Profile';
 import Forgot from './components/Account/Forgot';
 import Reset from './components/Account/Reset';
-import Mindmap from './components/Mindmap';
+import Home from './components/Home';
 import GoalPage from './components/GoalPage';
 import Archived from './components/Archived';
 
@@ -29,8 +29,8 @@ export default function getRoutes(store) {
   };
   return (
     <Route path="/" component={App}>
-      <IndexRoute component={Mindmap} onLeave={clearMessages} onEnter={ensureAuthenticated}/>
-      <Route path="/mindmap" component={Mindmap} onEnter={ensureAuthenticated} onLeave={clearMessages} />
+      <IndexRoute component={Home} onLeave={clearMessages} onEnter={ensureAuthenticated}/>
+      <Route path="/home" component={Home} onEnter={ensureAuthenticated} onLeave={clearMessages} />
       <Route path="/nodes" component={GoalPage} onEnter={ensureAuthenticated} onLeave={clearMessages} />
       <Route path="/archived" component={Archived} onEnter={ensureAuthenticated} onLeave={clearMessages} />
       <Route path="/login" component={Login} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>

@@ -34,21 +34,29 @@ var nodeSchema = new mongoose.Schema({
 });
 
 var userSchema = new mongoose.Schema({
-  name: String,
+  dateOfBirth: Date,
   email: { type: String, unique: true},
-  password: String,
-  primaryColor : String,
-  isNewUser: Boolean,
-  mindmapOption: String,
-  invitations: [{type: mongoose.Schema.Types.ObjectId, ref: 'Node'}],
-  nodes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Node'}],
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-  picture: String,
   facebook: String,
-  twitter: String,
+  firstName: String,
   google: String,
+  invitations: [{type: mongoose.Schema.Types.ObjectId, ref: 'Node'}],
+  isNewUser: Boolean,
+  jobTitle: String,
+  joinDate: String,
+  lastName: String,
+  username: String,
+  nodes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Node'}],
+  password: String,
+  passwordResetExpires: Date,
+  passwordResetToken: String,
+  picture: String,
+  primaryColor : String,
+  site: String,
+  supervisor: String,
+  twitter: String,
+  type: String,
   vk: String
+
 }, schemaOptions);
 
 

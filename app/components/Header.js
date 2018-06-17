@@ -16,7 +16,7 @@ export class Header extends React.Component {
     if(this.props.user)
       active = { borderBottomColor: this.props.user.primaryColor };
     const leftNavMindMap = this.props.token ? (
-        <li className="mindmap"><Link to="/mindmap" activeStyle={active}>Mindmap</Link></li>
+        <li className="home"><Link to="/home" activeStyle={active}>Home</Link></li>
     ):(<li></li>);
     const leftNavNodes = this.props.token ? (
         <li className="nodes"><Link to="/nodes" activeStyle={active}>Nodes</Link></li>

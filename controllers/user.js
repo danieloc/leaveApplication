@@ -62,7 +62,7 @@ exports.loginPost = function(req, res, next) {
  * POST /signup
  */
 exports.signupPost = function(req, res, next) {
-  req.assert('name', 'Name cannot be blank').notEmpty();
+  req.assert('username', 'Username cannot be blank').notEmpty();
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password must be at least 4 characters long').len(4);
@@ -79,12 +79,19 @@ exports.signupPost = function(req, res, next) {
       return res.status(400).send({ msg: 'The email address you have entered is already associated with another account.' });
     }
     user = new UserSchema.User({
-      name: req.body.name,
+      dateOfBirth: new Date(),
       email: req.body.email,
+      firstName: "FirstName",
+      isNewUser: true,
+      jobTitle: "eng",
+      joinDate: new Date(),
+      lastName: "LastName",
       password: req.body.password,
       primaryColor : '#2196f3',
-      mindmapOption: "sprawl",
-      isNewUser: true
+      site: "WA PERTH",
+      supervisor: "Frank Andrews",
+      type: "standard",
+      username: req.body.username,
     });
     user.save(function(err) {
       res.send({ token: generateToken(user), user: user });
@@ -118,9 +125,8 @@ exports.accountPut = function(req, res, next) {
       user.password = req.body.password;
     } else {
       user.email = req.body.email;
-      user.name = req.body.name;
+      user.username = req.body.username;
       user.primaryColor = req.body.primaryColor;
-      user.mindmapOption = req.body.mindmapOption;
     }
     user.save(function(err) {
       if ('password' in req.body) {
@@ -314,7 +320,7 @@ exports.authFacebook = function(req, res) {
             return res.status(409).send({ msg: 'There is already an existing account linked with Facebook that belongs to you.' });
           }
           user = req.user;
-          user.name = user.name || profile.name;
+          user.username = user.username || profile.name;
           user.picture = user.picture || 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
           user.facebook = profile.id;
           user.save(function() {
@@ -332,13 +338,20 @@ exports.authFacebook = function(req, res) {
               return res.status(400).send({ msg: user.email + ' is already associated with another account.' })
             }
             user = new UserSchema.User({
-              name: profile.name,
+              dateOfBirth: new Date(),
               email: profile.email,
-              picture: 'https://graph.facebook.com/' + profile.id + '/picture?type=large',
               facebook: profile.id,
+              firstName: "FirstName",
+              isNewUser : true,
+              jobTitle: "eng",
+              joinDate: new Date(),
+              lastName: "LastName",
+              picture: 'https://graph.facebook.com/' + profile.id + '/picture?type=large',
               primaryColor : '#2196f3',
-              mindmapOption: "sprawl",
-              isNewUser : true
+              site: "WA PERTH",
+              supervisor: "Frank Andrews",
+              type: "standard",
+              username: profile.name
             });
             user.save(function(err) {
               return res.send({ token: generateToken(user), user: user });
@@ -386,7 +399,7 @@ exports.authGoogle = function(req, res) {
             return res.status(409).send({ msg: 'There is already an existing account linked with Google that belongs to you.' });
           }
           user = req.user;
-          user.name = user.name || profile.name;
+          user.username = user.username || profile.name;
           user.picture = user.picture || profile.picture.replace('sz=50', 'sz=200');
           user.google = profile.sub;
           user.save(function() {
@@ -400,13 +413,20 @@ exports.authGoogle = function(req, res) {
             return res.send({ token: generateToken(user), user: user });
           }
           user = new UserSchema.User({
-            name: profile.name,
+            dateOfBirth: new Date(),
             email: profile.email,
-            picture: profile.picture.replace('sz=50', 'sz=200'),
+            firstName: "FirstName",
             google: profile.sub,
+            isNewUser: true,
+            jobTitle: "eng",
+            joinDate: new Date(),
+            lastName: "LastName",
+            picture: profile.picture.replace('sz=50', 'sz=200'),
             primaryColor : '#2196f3',
-            mindmapOption: "sprawl",
-            isNewUser: true
+            site: "WA PERTH",
+            supervisor: "Frank Andrews",
+            type: "standard",
+            username: profile.name
           });
           user.save(function(err) {
             res.send({ token: generateToken(user), user: user });

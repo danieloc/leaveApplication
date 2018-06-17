@@ -11,7 +11,6 @@ export class Profile extends React.Component {
     this.state = {
       email: props.user.email,
       name: props.user.name,
-      mindmapOption: props.user.mindmapOption,
       gravatar: props.user.gravatar,
       password: '',
       confirm: '',
@@ -90,14 +89,6 @@ export class Profile extends React.Component {
               </div>
               <div className="form-group">
                 <label className="col-sm-3">Mindmap</label>
-                <div className="col-sm-4">
-                  <label className="radio-inline radio col-sm-4">
-                    <input type="radio" name="mindmapOption" value={"sprawl"} checked={this.state.mindmapOption === "sprawl"} onChange={this.handleChange.bind(this)}/><span>Sprawl(Default)</span>
-                  </label>
-                  <label className="radio-inline col-sm-4">
-                    <input type="radio" name="mindmapOption" value={"tiered"} checked={this.state.mindmapOption === "tiered"} onChange={this.handleChange.bind(this)}/><span>Tiered</span>
-                  </label>
-                </div>
               </div>
               <div className="form-group">
                 <label className="col-sm-3">Primary Colour</label>
